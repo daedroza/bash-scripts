@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 1.00
+# wireless-ng, version 1.01
 
 # Warning :
 # ----------
@@ -26,7 +26,7 @@ pause() {
 
 one() {
 	echo "You have selected choice $choice."
-	sleep 2
+	sleep 4
 	clear
 	ifconfig wlan1 down
 	iwconfig wlan1 mode monitor
@@ -37,7 +37,7 @@ one() {
 
 two() {
 	echo "You have selected choice $choice."
-	sleep 2
+	sleep 4
 	clear
 	echo "Please enter BSSID(name) : "
 	read name
@@ -47,7 +47,7 @@ two() {
 
 three() {
 	echo "You have selected choice $choice."
-	sleep 2
+	sleep 4
 	clear
 	echo "Please enter BSSID(name) : "
 	read name
@@ -69,7 +69,6 @@ menu() {
 
 # INPUT
 input() {
-	read choice
 	read -p "Enter choice [ 1 - 4 ] : " choice
 	case $choice in
 		1) one ;;
