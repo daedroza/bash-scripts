@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 1.10
+# wireless-ng, version 1.20
 
 # Warning :
 # ----------
@@ -8,8 +8,6 @@
 
 ROOT_UID = 0 # $UID = 0 is usually root.
 E_NOTROOT = 87 # Non-root exit error.
-RED='\033[0;41;30m'
-STD='\033[0;0;39m'
 
 # Run as root
 if [ "$UID" -ne "$ROOT_UID" ]
@@ -27,16 +25,12 @@ pause() {
 
 scan() {
 	ifconfig wlan1 down
-	iw reg set US
-	iwconfig wlan1 txpower 20
 	iwconfig wlan1 mode managed
 	ifconfig wlan1 up
 }
 
 monitor() {
 	ifconfig wlan1 down
-	iw reg set US
-	iwconfig wlan1 txpower 20
 	iwconfig wlan1 mode monitor
 	ifconfig wlan1 up
 	sleep 3
@@ -48,7 +42,7 @@ one() {
 	clear
 	monitor
 	wifite-ng --all --mac --pixie # Use modded wifite
-	ifconfig wlan1 down
+	ifconfig wlan1 down # Switch off
 	pause
 }
 
@@ -72,13 +66,13 @@ three() {
 	sleep 2
 	clear
 	scan
-	iwlist wlan1 scan | grep -E 'Address|ESSID'
-	echo "Please enter BSSID from above : "
-	read BSSID
+	iwlist wlan1 scan | grep 'ESSID'
+	echo "Please enter ESSID from above : "
+	read ESSID
 	echo "Please enter the PIN : "
 	read PIN
 	monitor
-	reaver -i wlan1 -b $BSSID -E -S -vvv -N -T 1 -t 20 -d 0 -l 420 -p $PIN -m 9e:49:1f:d6:37:f4
+	bully -e $ESSID -W --pin $PIN -B wlan1
 	ifconfig wlan1 down # Switch off
 	pause
 }
@@ -101,7 +95,7 @@ input() {
 		2) two ;;
 		3) three ;;
 		4) exit 0;;
-		*) echo -e "${RED}Error...${STD}" && sleep 2
+		*) echo -e "Wrong choice. Please try again." && sleep 3
 	esac
 }
 
