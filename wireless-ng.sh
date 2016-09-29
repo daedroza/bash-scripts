@@ -12,7 +12,7 @@ E_NOTROOT = 87 # Non-root exit error.
 # Run as root
 if [ "$UID" -ne "$ROOT_UID" ]
 	then
-	echo "You're not running this script previliges."
+	echo "You're not running this script root previliges."
 	echo "Do sudo ./wireless-ng or su && ./wireless-ng"
 	exit $E_NOTROOT
 fi
