@@ -12,7 +12,7 @@ if [ "$UID" -ne "$ROOT_UID" ]
 	exit $E_NOTROOT
 
 # Install basic utilites
-apt-get install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make
+apt-get install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill
 
 # Get my own bash scripts
 cd ~
@@ -35,5 +35,3 @@ cp /root/make/wifite-mod-pixiewps/wifite-ng /usr/bin/wifite-ng
 chmod +x /usr/bin/wifite-ng
 cd ~
 rm -rf make
-
-
