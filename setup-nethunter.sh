@@ -12,7 +12,7 @@ if [ "$UID" -ne "$ROOT_UID" ]
 	exit $E_NOTROOT
 
 # Install basic utilites
-apt-get install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill
+apt-get install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill cowpatty
 
 # Get my own bash scripts
 cd ~
