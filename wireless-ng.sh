@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 1.20
+# wireless-ng, version 1.30
 
 # Warning :
 # ----------
@@ -77,6 +77,11 @@ three() {
 	pause
 }
 
+four() {
+ifconfig wlan1 down # Switch off if it's open from other options
+exit 0
+}
+
 # MENU
 menu() {
 	clear
@@ -94,7 +99,7 @@ input() {
 		1) one ;;
 		2) two ;;
 		3) three ;;
-		4) exit 0;;
+		4) four ;;
 		*) echo -e "Wrong choice. Please try again." && sleep 3
 	esac
 }
