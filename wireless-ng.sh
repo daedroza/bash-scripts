@@ -25,7 +25,6 @@ pause() {
 
 monitor() {
 	ifconfig wlan1 down
-	iwconfig wlan1 mode monitor
 	ifconfig wlan1 up
 	sleep 3
 }
@@ -58,7 +57,6 @@ three() {
 	echo "You have selected choice $choice."
 	sleep 2
 	clear
-	scan
 	iwlist wlan0 scan | grep 'Address|ESSID'
 	echo "Please enter BSSID/ESSID from above : "
 	read ESSID
