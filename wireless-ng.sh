@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 1.30
+# wireless-ng, version 2.00
 
 # Warning :
 # ----------
@@ -23,12 +23,6 @@ pause() {
 	fackEnterKey
 }
 
-scan() {
-	ifconfig wlan1 down
-	iwconfig wlan1 mode managed
-	ifconfig wlan1 up
-}
-
 monitor() {
 	ifconfig wlan1 down
 	iwconfig wlan1 mode monitor
@@ -50,8 +44,7 @@ two() {
 	echo "You have selected choice $choice."
 	sleep 2
 	clear
-	scan
-	iwlist wlan1 scan | grep -E 'Address|ESSID'
+	iwlist wlan0 scan | grep -E 'Address|ESSID'
 	sleep 2
 	echo "Please enter BSSID from above : "
 	read BSSID
@@ -66,8 +59,8 @@ three() {
 	sleep 2
 	clear
 	scan
-	iwlist wlan1 scan | grep 'ESSID'
-	echo "Please enter ESSID from above : "
+	iwlist wlan0 scan | grep 'Address|ESSID'
+	echo "Please enter BSSID/ESSID from above : "
 	read ESSID
 	echo "Please enter the PIN : "
 	read PIN
