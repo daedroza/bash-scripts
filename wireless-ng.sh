@@ -99,10 +99,6 @@ input() {
 	esac
 }
 
-# Trap CTRL+C, CTRL+Z and quit singles
-
-trap '' SIGINT SIGQUIT SIGTSTP
-
 # MAIN
 while true
 do
