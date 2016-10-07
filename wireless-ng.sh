@@ -1,5 +1,5 @@
 #!/bin/bash
-# wireless-ng, version 2.00
+# wireless-ng, version 1.50
 
 # Warning :
 # ----------
