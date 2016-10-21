@@ -3,8 +3,8 @@
 
 # Automate a way to reduce pain.
 
-ROOT_UID = 0 # $UID = 0 is usually root.
-E_NOTROOT = 87 # Non-root exit error.
+ROOT_UID=0 # $UID = 0 is usually root.
+E_NOTROOT=87 # Non-root exit error.
 
 # Run as root
 if [ "$UID" -ne "$ROOT_UID" ]
