@@ -10,6 +10,7 @@ if [ "$UID" -ne "$ROOT_UID" ]
 	echo "You're not running this script root previliges."
 	echo "Do sudo ./setup-nethunter.sh or su && ./setup-nethunter.sh"
 	exit $E_NOTROOT
+fi
 
 # Install basic utilites
 apt-get install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill cowpatty
