@@ -16,7 +16,7 @@ fi
 apt-get update
 
 # Install basic utilites
-apt-get install -y gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill cowpatty
+apt-get -y install gcc libpcap-dev aircrack-ng sqlite3 libsqlite3-dev libssl-dev bully wifite make rfkill cowpatty
 
 # Get my own bash scripts
 cd ~
