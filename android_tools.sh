@@ -7,7 +7,6 @@ CM_DRIVE='/media/daedroza/workspace/CyanogenMod-14.X';
 # Standard Stuff
 standard() {
   cd ${CM_DRIVE};
-  export PATH=~/bin:$PATH;
 }
 
 ccache() {
@@ -16,7 +15,7 @@ ccache() {
   ./prebuilts/sdk/tools/jack-admin start-server; # Need more memory
   export USE_CCACHE=1;
   export USE_PREBUILT_CACHE=1;
-  export CCACHE_DIR=~/_ccache;
+  export CCACHE_DIR=~/.ccache;
   export CCACHE_LOGFILE=${CCACHE_DIR}/ccache.log;
 }
 
@@ -33,18 +32,16 @@ build_rom() {
   standard;
   initialise;
   ccache;
-  make bacon -j6;
+  export OUT_DIR=/media/daedroza/output/out
+  make bacon -j8;
   exit 0;
 }
 
 # Make a kernel
 build_kernel() {
   cd $CM_DRIVE;
-  cd out_kernel;
-  rm -rf *;
-  cd ../;
   initialise;
-  export OUT_DIR=${CM_DRIVE}/out_kernel;
+  export OUT_DIR=/media/daedroza/output/out_kernel;
   make bootimage -j16;
   exit 0;
 }
